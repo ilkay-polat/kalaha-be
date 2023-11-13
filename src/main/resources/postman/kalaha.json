@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "0941aa22-3fed-45db-970b-8c69758a6ee5",
+		"name": "Kalaha Game Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Game",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var locationHeader = pm.response.headers.get('Location');",
+							"",
+							"var pathParts = locationHeader.split('/');",
+							"",
+							"var gameId = pathParts[pathParts.length - 1];",
+							"",
+							"pm.environment.set(\"game-id\", gameId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"playerName\": \"Jack Daniel\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/kalaha/games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"kalaha",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Join Game",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"playerName\": \"George Dickel\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/kalaha/games/{{game-id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"kalaha",
+						"games",
+						"{{game-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Restart Game",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/kalaha/games/{{game-id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"kalaha",
+						"games",
+						"{{game-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quit Game",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/kalaha/games/{{game-id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"kalaha",
+						"games",
+						"{{game-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Play Game",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pitNumber\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/kalaha/games/{{game-id}}/players/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"kalaha",
+						"games",
+						"{{game-id}}",
+						"players",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game Score",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/kalaha/games/{{game-id}}/board/score",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"kalaha",
+						"games",
+						"{{game-id}}",
+						"board",
+						"score"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
